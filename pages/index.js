@@ -1,8 +1,7 @@
 import { signIn, signOut, useSession } from 'next-auth/react';
-import Hero from '../components/Hero';
 
 export default function Home() {
-  const { data: session, status } = useSession();
+  const { data: session } = useSession();
 
   return (
     <div className="flex items-center justify-center h-screen bg-blue-400">

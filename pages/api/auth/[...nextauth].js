@@ -34,7 +34,6 @@ export default NextAuth({
   secret: process.env.NEXT_AUTH_SECRET,
   callbacks: {
     jwt: ({ token, user }) => {
-      console.log('JWT', token, user);
       if (user) {
         token.id = user.id;
         token.username = user.username;
@@ -43,7 +42,6 @@ export default NextAuth({
       return token;
     },
     session: ({ session, token }) => {
-      console.log('SESSION', session, token);
       if (token) {
         session.id = token.id;
         session.user = token;
