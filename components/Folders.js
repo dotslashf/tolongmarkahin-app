@@ -1,13 +1,16 @@
 export default function Folders({ selected, folders, onClickFolder }) {
   return (
-    <div className="flex overflow-x-scroll">
-      <ul className="menu menu-horizontal space-x-2 p-2 bg-base-100 rounded-box">
+    <div className="flex overflow-x-scroll w-full">
+      <ul className="menu menu-horizontal space-x-2 p-2 lg:p-3 bg-base-100 rounded-box">
         {folders.map(folder => {
           return (
             <li key={folder}>
               <button
                 className={
-                  selected === folder ? 'bg-primary text-primary-content' : ''
+                  'hover:text-base-100 hover:bg-primary-focus bg-base-100 ' +
+                  (selected === folder
+                    ? 'bg-primary text-base-100'
+                    : 'text-primary')
                 }
                 onClick={onClickFolder(folder)}
               >

@@ -11,7 +11,7 @@ export default function TwitterProfileCard() {
   if (!data) return <TwitterProfileCardLoading />;
 
   return (
-    <div className="card card-compact bg-base-100 shadow-xl">
+    <div className="card card-compact bg-base-100">
       <figure>
         <img
           src={
@@ -31,17 +31,17 @@ export default function TwitterProfileCard() {
         <div></div>
         <div className="card-actions justify-start">
           <div className="flex space-x-2">
-            <span className="badge badge-primary">
-              followers: {data.followers_count}
-            </span>
-            <span className="badge badge-secondary ">
+            <span className="badge badge-primary text-base-100">
               following: {data.friends_count}
+            </span>
+            <span className="badge badge-primary text-base-100">
+              followers: {data.followers_count}
             </span>
           </div>
         </div>
         <div className="card-actions justify-start mt-4">
           <button
-            className="btn btn-sm btn-outline btn-accent"
+            className="btn btn-sm btn-accent"
             onClick={() => {
               window.open(`https://twitter.com/${data.screen_name}`);
             }}
@@ -56,22 +56,21 @@ export default function TwitterProfileCard() {
 
 function TwitterProfileCardLoading() {
   return (
-    <div className="card bg-base-100 shadow-xl animate-pulse">
+    <div className="card bg-base-100 animate-pulse">
       <figure>
-        <div className="bg-gray-300 w-full h-24" />
+        <div className="bg-gray-400 w-full h-24" />
       </figure>
       <div className="card-body p-4">
-        <div className="bg-gray-300 h-8 rounded-md"></div>
-        <div className="bg-gray-300 h-6 rounded-md"></div>
-        <div></div>
+        <div className="bg-gray-400 h-8 rounded-md"></div>
+        <div className="bg-gray-400 h-6 rounded-md"></div>
         <div className="card-actions justify-start">
           <div className="flex space-x-2">
-            <div className="rounded-full h-4 bg-gray-300 w-24"></div>
-            <div className="rounded-full h-4 bg-gray-300 w-24"></div>
+            <div className="rounded-full h-4 bg-gray-400 w-24"></div>
+            <div className="rounded-full h-4 bg-gray-400 w-24"></div>
           </div>
         </div>
         <div className="card-actions justify-end mt-4">
-          <button className="rounded-md h-8 bg-gray-300 w-24"></button>
+          <button className="rounded-md h-8 bg-gray-400 w-24"></button>
         </div>
       </div>
     </div>
@@ -80,7 +79,7 @@ function TwitterProfileCardLoading() {
 
 function TwitterProfileCardError() {
   return (
-    <div className="card bg-base-100 shadow-xl">
+    <div className="card bg-base-100">
       <figure>
         <div className="bg-red-500 w-full h-24" />
       </figure>

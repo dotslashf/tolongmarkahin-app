@@ -8,5 +8,5 @@ const client = new Twit({
 });
 
 export const fetchUser = async user_id => {
-  return await client.get('users/show', { user_id });
+  return await client.get('users/show', { user_id, include_entities: true });
 };
