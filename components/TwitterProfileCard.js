@@ -4,7 +4,7 @@ import fetcher from '../utils/fetcher';
 
 function TwitterProfileCardLoading() {
   return (
-    <div className="card w-80 bg-base-100 shadow-xl animate-pulse">
+    <div className="card bg-base-100 shadow-xl animate-pulse">
       <figure>
         <div className="bg-gray-300 w-full h-24" />
       </figure>
@@ -28,7 +28,7 @@ function TwitterProfileCardLoading() {
 
 function TwitterProfileCardError() {
   return (
-    <div className="card w-80 bg-base-100 shadow-xl">
+    <div className="card bg-base-100 shadow-xl">
       <figure>
         <div className="bg-red-500 w-full h-24" />
       </figure>
