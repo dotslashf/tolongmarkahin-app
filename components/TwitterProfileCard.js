@@ -26,10 +26,34 @@ function TwitterProfileCardLoading() {
   );
 }
 
+function TwitterProfileCardError() {
+  return (
+    <div className="card w-80 bg-base-100 shadow-xl">
+      <figure>
+        <div className="bg-red-500 w-full h-24" />
+      </figure>
+      <div className="card-body p-4">
+        <div className="bg-red-500 h-8 rounded-md"></div>
+        <div className="bg-red-500 h-6 rounded-md"></div>
+        <div></div>
+        <div className="card-actions justify-start">
+          <div className="flex space-x-2">
+            <div className="rounded-full h-4 bg-red-500 w-24"></div>
+            <div className="rounded-full h-4 bg-red-500 w-24"></div>
+          </div>
+        </div>
+        <div className="card-actions justify-end mt-4">
+          <button className="rounded-md h-8 bg-red-500 w-24"></button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 export default function TwitterProfileCard({ userId }) {
   const { data, error } = useSWR(`/api/twitter/${userId}`, fetcher);
 
-  if (error) return <div>Failed to load</div>;
+  if (error) return <TwitterProfileCardError />;
   if (!data) return <TwitterProfileCardLoading />;
 
   return (
