@@ -4,7 +4,7 @@ export default function Home() {
   const { data: session } = useSession();
 
   return (
-    <div className="flex items-center justify-center h-screen bg-blue-400">
+    <div className="flex items-center justify-center h-screen bg-base-100">
       {!session && (
         <>
           <span>You are not signed in</span>
