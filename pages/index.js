@@ -1,11 +1,16 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { signIn, signOut, useSession } from 'next-auth/react';
+import Head from 'next/head';
 
 export default function Home() {
   const { data: session } = useSession();
 
   return (
     <div className="flex items-center justify-center h-screen bg-base-300">
+      <Head>
+        <title>Tolongmarkahin</title>
+        <meta property="og:title" content="My page title" key="title" />
+      </Head>
       {!session && (
         <div>
           <div className="hero bg-base-200 rounded-box p-16 shadow-xl">
