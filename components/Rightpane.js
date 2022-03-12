@@ -4,6 +4,18 @@ import Folders from './Folders';
 import { useState } from 'react';
 import Tweets from './Tweets';
 
+function RightPaneEmpty() {
+  return (
+    <div className="flex flex-col h-96 space-y-2">
+      <div className="card bg-base-100">
+        <div className="card-body p-4">
+          <p className="card-title h-8 rounded-md">Belum ada data</p>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function RightpaneLoading() {
   return (
     <div className="flex flex-col animate-pulse">
@@ -40,6 +52,7 @@ export default function Rightpane({ defaultFolder }) {
   const [selectedFolder, setSelectedFolder] = useState(defaultFolder);
 
   const { data, error } = useSWR(`/api/firebase/folders`, fetcher);
+
   const folders = data?.data.map(data => {
     return data.folderName;
   });
@@ -57,17 +70,21 @@ export default function Rightpane({ defaultFolder }) {
     };
   };
 
-  if (!data) return <RightpaneLoading />;
-
   return (
     <div className="flex flex-col relative">
-      <Folders
-        folders={folders}
-        onClickFolder={handlerOnClickFolder}
-        selected={selectedFolder}
-      />
+      {data?.data.length === 0 && <RightPaneEmpty />}
+      {!data && <RightpaneLoading />}
+      {data?.data.length > 0 && (
+        <>
+          <Folders
+            folders={folders}
+            onClickFolder={handlerOnClickFolder}
+            selected={selectedFolder}
+          />
 
-      <Tweets tweets={tweets} />
+          <Tweets tweets={tweets} />
+        </>
+      )}
     </div>
   );
 }
