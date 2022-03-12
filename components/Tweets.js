@@ -65,7 +65,6 @@ export default function Tweets({ tweets }) {
                             className="w-28 h-28 md:h-36 md:w-36 object-cover rounded-box"
                             src={media.media_url}
                             alt={bookmark.tweet.user.screen_name}
-                            tar
                           />
                         </a>
                       );

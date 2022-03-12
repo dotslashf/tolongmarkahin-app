@@ -18,14 +18,22 @@ export default async function handler(req, res) {
     const bookmarks = await Promise.all(
       folders.map(async folder => {
         const bookmarks = await folder.listDocuments();
-        const b = await Promise.all(
-          bookmarks.map(async bookmark => {
-            return (await bookmark.get()).data();
-          })
-        );
+        const b = (
+          await Promise.all(
+            bookmarks.map(async bookmark => {
+              return (await bookmark.get()).data();
+            })
+          )
+        ).filter(b => {
+          console.log(b.tweet.text);
+          return b.tweet.text !== 'dummy text';
+        });
+
         return {
           folderName: folder.id,
-          bookmarks: b,
+          bookmarks: b.sort((a, b) => {
+            return b.createdAt.toDate() - a.createdAt.toDate();
+          }),
         };
       })
     );
