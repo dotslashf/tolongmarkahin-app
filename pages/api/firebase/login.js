@@ -16,7 +16,6 @@ export default async function handler(req, res) {
       password,
       queryRef.docs[0].data().password
     );
-    console.log(isValidPassword, queryRef.docs[0].data().password, password);
     if (!isValidPassword) {
       return res.status(401).send({ message: 'Invalid password.' });
     }

@@ -63,6 +63,7 @@ export default function Rightpane({ defaultFolder }) {
   });
 
   let tweets = hashBookmarks[selectedFolder];
+  tweets ? tweets : (tweets = []);
 
   const handlerOnClickFolder = folderName => {
     return () => {

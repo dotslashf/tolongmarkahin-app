@@ -25,7 +25,6 @@ export default async function handler(req, res) {
             })
           )
         ).filter(b => {
-          console.log(b.tweet.text);
           return b.tweet.text !== 'dummy text';
         });
 
