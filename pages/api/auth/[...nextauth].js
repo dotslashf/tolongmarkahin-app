@@ -14,11 +14,14 @@ export default NextAuth({
         },
       },
       async authorize(credentials) {
-        const res = await fetch('http://localhost:3000/api/firebase/login', {
-          method: 'POST',
-          body: JSON.stringify(credentials),
-          headers: { 'Content-Type': 'application/json' },
-        });
+        const res = await fetch(
+          'https://tolongmarkahin-app.vercel.app/api/firebase/login',
+          {
+            method: 'POST',
+            body: JSON.stringify(credentials),
+            headers: { 'Content-Type': 'application/json' },
+          }
+        );
         const user = await res.json();
         if (res.ok && user) {
           return user;
