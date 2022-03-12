@@ -1,6 +1,8 @@
 import NextAuth from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 
+const NODE_ENV = process.env.NODE_ENV;
+
 export default NextAuth({
   providers: [
     CredentialsProvider({
@@ -15,7 +17,11 @@ export default NextAuth({
       },
       async authorize(credentials) {
         const res = await fetch(
-          'https://tolongmarkahin-app.vercel.app/api/firebase/login',
+          `${
+            NODE_ENV === 'production'
+              ? 'https://tolongmarkahin-app.vercel.app/'
+              : 'http://localhost:3000/'
+          }/api/firebase/login`,
           {
             method: 'POST',
             body: JSON.stringify(credentials),
