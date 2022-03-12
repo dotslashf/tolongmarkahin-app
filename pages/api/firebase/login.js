@@ -1,4 +1,5 @@
 import db from '../../../services/firebase';
+import bcryptjs from 'bcryptjs';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -10,6 +11,14 @@ export default async function handler(req, res) {
     const queryRef = await configRef.where('username', '==', username).get();
     if (queryRef.empty) {
       return res.status(404).send({ message: 'No matching documents.' });
+    }
+    const isValidPassword = bcryptjs.compareSync(
+      password,
+      queryRef.docs[0].data().password
+    );
+    console.log(isValidPassword, queryRef.docs[0].data().password, password);
+    if (!isValidPassword) {
+      return res.status(401).send({ message: 'Invalid password.' });
     }
     const user = {
       id: queryRef.docs[0].id,
