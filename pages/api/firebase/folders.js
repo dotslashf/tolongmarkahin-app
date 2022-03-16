@@ -15,7 +15,17 @@ export default async function handler(req, res) {
       .doc(token.id)
       .listCollections();
 
-    const folders = foldersRef.map(folder => folder.id);
+    const folders = await Promise.all(
+      foldersRef.map(async folder => {
+        const bookmarksCount = await folder
+          .where('tweet.full_text', '!=', '')
+          .get();
+        return {
+          id: folder.id,
+          bookmarksCount: bookmarksCount.size,
+        };
+      })
+    );
 
     return res.status(200).json({
       data: folders,

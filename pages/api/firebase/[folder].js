@@ -21,13 +21,21 @@ export default async function handler(req, res) {
 
     const bookmarks = [];
     bookmarksRef.forEach(bookmark => {
-      bookmarks.push({ id: bookmark.id, ...bookmark.data() });
+      bookmarks.push({
+        id: bookmark.id,
+        ...bookmark.data(),
+        createdAt: bookmark.data().createdAt.toDate(),
+      });
     });
 
     return res.status(200).json({
-      data: bookmarks.filter(b => {
-        return b.tweet.text !== 'dummy text';
-      }),
+      data: bookmarks
+        .filter(b => {
+          return b.tweet.text !== 'dummy text';
+        })
+        .sort((a, b) => {
+          return b.createdAt - a.createdAt;
+        }),
     });
   } catch (err) {
     return res.status(404).json({ error: err.message });

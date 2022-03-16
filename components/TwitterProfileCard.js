@@ -11,7 +11,7 @@ export default function TwitterProfileCard() {
   if (!data) return <TwitterProfileCardLoading />;
 
   return (
-    <div className="card card-compact bg-base-100 shadow-md">
+    <div className="card card-compact bg-base-100 shadow-sm">
       <figure>
         <img
           src={

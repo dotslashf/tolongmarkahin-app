@@ -4,17 +4,17 @@ export default function Folders({ selected, folders, onClickFolder }) {
       <ul className="menu menu-horizontal space-x-2 p-2 lg:p-3 bg-base-100 md:w-full w-auto rounded-box">
         {folders.map(folder => {
           return (
-            <li key={folder}>
+            <li key={folder.id}>
               <button
                 className={
                   'hover:text-base-100 hover:bg-primary-focus ' +
-                  (selected === folder
+                  (selected === folder.id
                     ? 'bg-primary text-base-100'
                     : 'text-primary')
                 }
-                onClick={onClickFolder(folder)}
+                onClick={onClickFolder(folder.id)}
               >
-                {selected === folder ? (
+                {selected === folder.id ? (
                   <svg
                     className="w-6 h-6"
                     fill="none"
@@ -45,7 +45,7 @@ export default function Folders({ selected, folders, onClickFolder }) {
                     ></path>
                   </svg>
                 )}
-                {folder}
+                {folder.id} ({folder.bookmarksCount})
               </button>
             </li>
           );

@@ -1,6 +1,7 @@
 import Modal from './Modal';
 import { useState } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
+import { formatDate } from '../utils/common';
 
 /* eslint-disable @next/next/no-img-element */
 export default function Bookmark({ bookmark, folderName }) {
@@ -18,6 +19,7 @@ export default function Bookmark({ bookmark, folderName }) {
     });
     if (res.ok) {
       mutate(`/api/firebase/${folderName}`);
+      mutate(`/api/firebase/folders`);
       setIsOpen(false);
     }
   }
@@ -39,26 +41,50 @@ export default function Bookmark({ bookmark, folderName }) {
           </div>
           {bookmark.tweet.user.name}
         </h2>
-        <a
-          href={`https://www.twitter.com/${bookmark.tweet.user.screen_name}`}
-          target="_blank"
-          className="badge badge-secondary font-bold"
-          rel="noreferrer"
-        >
-          <svg
-            className="w-4 h-4"
-            fill="currentColor"
-            viewBox="0 0 20 20"
-            xmlns="http://www.w3.org/2000/svg"
+        <div className="flex space-x-0 md:space-x-2 flex-col md:flex-row space-y-2 md:space-y-0">
+          <a
+            href={`https://www.twitter.com/${bookmark.tweet.user.screen_name}`}
+            target="_blank"
+            className="badge badge-secondary font-bold"
+            rel="noreferrer"
           >
-            <path
-              fillRule="evenodd"
-              d="M14.243 5.757a6 6 0 10-.986 9.284 1 1 0 111.087 1.678A8 8 0 1118 10a3 3 0 01-4.8 2.401A4 4 0 1114 10a1 1 0 102 0c0-1.537-.586-3.07-1.757-4.243zM12 10a2 2 0 10-4 0 2 2 0 004 0z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-          {bookmark.tweet.user.screen_name}
-        </a>
+            <svg
+              className="w-4 h-4"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                fillRule="evenodd"
+                d="M14.243 5.757a6 6 0 10-.986 9.284 1 1 0 111.087 1.678A8 8 0 1118 10a3 3 0 01-4.8 2.401A4 4 0 1114 10a1 1 0 102 0c0-1.537-.586-3.07-1.757-4.243zM12 10a2 2 0 10-4 0 2 2 0 004 0z"
+                clipRule="evenodd"
+              ></path>
+            </svg>
+            {bookmark.tweet.user.screen_name}
+          </a>
+          <a
+            href={`https://www.twitter.com/${bookmark.tweet.user.screen_name}`}
+            target="_blank"
+            className="badge badge-accent font-bold gap-2"
+            rel="noreferrer"
+          >
+            <svg
+              className="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
+            </svg>
+            ditambahkan {formatDate(bookmark.createdAt)}
+          </a>
+        </div>
         <p>{bookmark.tweet.full_text}</p>
         <div
           className={
