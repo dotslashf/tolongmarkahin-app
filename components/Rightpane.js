@@ -2,7 +2,7 @@ import useSWR from 'swr';
 import fetcher from '../utils/fetcher';
 import Folders from './Folders';
 import { useState } from 'react';
-import Tweets from './Tweets';
+import Tweets from './Bookmarks';
 
 function RightPaneEmpty() {
   return (
