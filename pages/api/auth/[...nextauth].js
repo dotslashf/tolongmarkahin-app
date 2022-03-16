@@ -19,7 +19,7 @@ export default NextAuth({
         const res = await fetch(
           `${
             NODE_ENV === 'production'
-              ? 'https://tolongmarkahin-app.vercel.app/'
+              ? 'https://tolongmarkahin.vercel.app/'
               : 'http://localhost:3000/'
           }/api/firebase/login`,
           {
