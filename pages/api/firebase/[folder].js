@@ -9,16 +9,25 @@ export default async function handler(req, res) {
   if (!token) {
     return res.status(401).json({ message: 'No token' });
   }
+
+  const { folder } = req.query;
+
   try {
-    const foldersRef = await db
+    const bookmarksRef = await db
       .collection('bookmarks')
       .doc(token.id)
-      .listCollections();
+      .collection(folder)
+      .get();
 
-    const folders = foldersRef.map(folder => folder.id);
+    const bookmarks = [];
+    bookmarksRef.forEach(bookmark => {
+      bookmarks.push(bookmark.data());
+    });
 
     return res.status(200).json({
-      data: folders,
+      data: bookmarks.filter(b => {
+        return b.tweet.text !== 'dummy text';
+      }),
     });
   } catch (err) {
     return res.status(404).json({ error: err.message });
