@@ -1,5 +1,27 @@
+import Modal from './Modal';
+import { useState } from 'react';
+import useSWR, { useSWRConfig } from 'swr';
+
 /* eslint-disable @next/next/no-img-element */
-export default function Bookmark({ bookmark }) {
+export default function Bookmark({ bookmark, folderName }) {
+  let [isOpen, setIsOpen] = useState(false);
+  const { mutate } = useSWRConfig();
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  async function onDeleteBookmark(bookmarkId) {
+    const res = await fetch(`/api/firebase/delete`, {
+      method: 'POST',
+      body: JSON.stringify({ folder: folderName, bookmarkId }),
+    });
+    if (res.ok) {
+      mutate(`/api/firebase/${folderName}`);
+      setIsOpen(false);
+    }
+  }
+
   return (
     <div className="card card-compact hover:bg-primary-focus bg-primary text-base-100 transition-colors">
       <div className="card-body">
@@ -15,7 +37,7 @@ export default function Bookmark({ bookmark }) {
               />
             </div>
           </div>
-          {bookmark.tweet.user.name}{' '}
+          {bookmark.tweet.user.name}
         </h2>
         <a
           href={`https://www.twitter.com/${bookmark.tweet.user.screen_name}`}
@@ -62,28 +84,57 @@ export default function Bookmark({ bookmark }) {
               })}
             </div>
           ) : null}
-          <button
-            className="btn btn-sm btn-accent self-end gap-2"
-            onClick={() => {
-              window.open(
-                `https://twitter.com/${bookmark.tweet.user.screen_name}/status/${bookmark.tweet.id_str}`
-              );
-            }}
-          >
-            <svg
-              className="w-4"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
+
+          <div className="flex flex-col md:flex-row md:space-x-2 md:space-y-0 space-y-2 self-end">
+            <button
+              className="btn btn-sm btn-accent gap-2"
+              onClick={() => {
+                window.open(
+                  `https://twitter.com/${bookmark.tweet.user.screen_name}/status/${bookmark.tweet.id_str}`
+                );
+              }}
             >
-              <path
-                fillRule="evenodd"
-                d="M6.672 1.911a1 1 0 10-1.932.518l.259.966a1 1 0 001.932-.518l-.26-.966zM2.429 4.74a1 1 0 10-.517 1.932l.966.259a1 1 0 00.517-1.932l-.966-.26zm8.814-.569a1 1 0 00-1.415-1.414l-.707.707a1 1 0 101.415 1.415l.707-.708zm-7.071 7.072l.707-.707A1 1 0 003.465 9.12l-.708.707a1 1 0 001.415 1.415zm3.2-5.171a1 1 0 00-1.3 1.3l4 10a1 1 0 001.823.075l1.38-2.759 3.018 3.02a1 1 0 001.414-1.415l-3.019-3.02 2.76-1.379a1 1 0 00-.076-1.822l-10-4z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-            Tweet
-          </button>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-4 h-4"
+                viewBox="0 0 24 24"
+                strokeWidth="2"
+                stroke="currentColor"
+                fill="none"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M22 4.01c-1 .49 -1.98 .689 -3 .99c-1.121 -1.265 -2.783 -1.335 -4.38 -.737s-2.643 2.06 -2.62 3.737v1c-3.245 .083 -6.135 -1.395 -8 -4c0 0 -4.182 7.433 4 11c-1.872 1.247 -3.739 2.088 -6 2c3.308 1.803 6.913 2.423 10.034 1.517c3.58 -1.04 6.522 -3.723 7.651 -7.742a13.84 13.84 0 0 0 .497 -3.753c-.002 -.249 1.51 -2.772 1.818 -4.013z" />
+              </svg>
+              Tweet
+            </button>
+            <button
+              type="button"
+              onClick={openModal}
+              className="btn btn-sm btn-secondary gap-2"
+            >
+              <svg
+                className="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                ></path>
+              </svg>
+              Delete
+            </button>
+            <Modal
+              isOpen={isOpen}
+              setIsOpen={setIsOpen}
+              bookmarkId={bookmark.id}
+              onDeleteBookmark={onDeleteBookmark}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -4,31 +4,27 @@ import { getToken } from 'next-auth/jwt';
 const secret = process.env.NEXT_AUTH_SECRET;
 
 export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).send({ message: 'Only POST requests allowed' });
+  }
+
   const token = await getToken({ req, secret });
 
   if (!token) {
     return res.status(401).json({ message: 'No token' });
   }
 
-  const { folder } = req.query;
+  const { folder, bookmarkId } = JSON.parse(req.body);
 
   try {
-    const bookmarksRef = await db
+    await db
       .collection('bookmarks')
       .doc(token.id)
       .collection(folder)
-      .get();
+      .doc(bookmarkId)
+      .delete();
 
-    const bookmarks = [];
-    bookmarksRef.forEach(bookmark => {
-      bookmarks.push({ id: bookmark.id, ...bookmark.data() });
-    });
-
-    return res.status(200).json({
-      data: bookmarks.filter(b => {
-        return b.tweet.text !== 'dummy text';
-      }),
-    });
+    return res.status(200).json({ status: 'OK', message: 'Bookmark deleted' });
   } catch (err) {
     return res.status(404).json({ error: err.message });
   }

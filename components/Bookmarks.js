@@ -11,7 +11,13 @@ export default function Bookmarks({ folder }) {
       {data?.data.length === 0 && <BookmarksEmpty />}
       {data?.data.length > 0 &&
         data.data.map(bookmark => {
-          return <Bookmark key={bookmark.tweet.id} bookmark={bookmark} />;
+          return (
+            <Bookmark
+              key={bookmark.tweet.id}
+              bookmark={bookmark}
+              folderName={folder}
+            />
+          );
         })}
     </div>
   );
@@ -36,7 +42,7 @@ function BookmarksLoading() {
 
 function BookmarksEmpty() {
   return (
-    <div className="flex flex-col h-96 space-y-2">
+    <div className="flex flex-col h-48 space-y-2">
       <div className="card bg-base-100">
         <div className="card-body p-4">
           <p className="card-title h-8 rounded-md">
