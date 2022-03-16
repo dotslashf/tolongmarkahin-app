@@ -46,21 +46,18 @@ export default function Bookmark({ bookmark }) {
           }
         >
           {bookmark.tweet.extended_entities ? (
-            <div className="flex space-x-2">
+            <div className="carousel carousel-center max-w-sm p-2 space-x-2 bg-base-100 rounded-box mt-4">
               {bookmark.tweet.extended_entities.media.map(media => {
                 return (
-                  <a
-                    key={media.media_url}
-                    href={media.media_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    <img
-                      className="w-28 h-28 md:h-36 md:w-36 object-cover rounded-box"
-                      src={media.media_url}
-                      alt={bookmark.tweet.user.screen_name}
-                    />
-                  </a>
+                  <div className="carousel-item" key={media.media_url}>
+                    <a href={media.media_url} target="_blank" rel="noreferrer">
+                      <img
+                        className="w-28 h-28 md:h-36 md:w-36 object-cover rounded-box"
+                        src={media.media_url}
+                        alt={bookmark.tweet.user.screen_name}
+                      />
+                    </a>
+                  </div>
                 );
               })}
             </div>
