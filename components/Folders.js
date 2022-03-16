@@ -7,7 +7,7 @@ export default function Folders({ selected, folders, onClickFolder }) {
             <li key={folder}>
               <button
                 className={
-                  'hover:text-base-100 hover:bg-primary-focus bg-base-100 ' +
+                  'hover:text-base-100 hover:bg-primary-focus ' +
                   (selected === folder
                     ? 'bg-primary text-base-100'
                     : 'text-primary')
