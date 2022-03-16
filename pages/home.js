@@ -27,7 +27,7 @@ export default function UserHome() {
           <div className="lg:col-span-1 md:col-span-3">
             <TwitterProfileCard />
           </div>
-          <div className="lg:col-span-3 md:col-span-5 rounded-b-box overflow-y-scroll">
+          <div className="lg:col-span-3 md:col-span-5 rounded-box overflow-y-scroll">
             <Rightpane defaultFolder={session.user.defaultFolder} />
           </div>
         </div>

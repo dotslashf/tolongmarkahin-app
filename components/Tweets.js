@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 export default function Tweets({ tweets }) {
   return (
-    <div className="flex-1 flex-col overflow-y-scroll max-h-screen space-y-3 bg-base-100 mt-4 p-2 lg:p-3 rounded-box">
+    <div className="flex-1 flex-col overflow-y-scroll space-y-3 bg-base-100 mt-4 p-2 lg:p-3 rounded-box">
       {tweets.map(bookmark => {
         return (
           <div
