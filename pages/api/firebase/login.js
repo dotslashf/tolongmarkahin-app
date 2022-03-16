@@ -8,7 +8,9 @@ export default async function handler(req, res) {
   try {
     const { username, password } = req.body;
     const configRef = db.collection('config');
-    const queryRef = await configRef.where('username', '==', username).get();
+    const queryRef = await configRef
+      .where('username', '==', username.toLowerCase())
+      .get();
     if (queryRef.empty) {
       return res.status(404).send({ message: 'No matching documents.' });
     }
