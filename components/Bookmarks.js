@@ -7,6 +7,26 @@ export default function Bookmarks({ folder }) {
   const { data, error } = useSWR(`/api/firebase/${folder}`, fetcher);
   const [query, setQuery] = useState('');
 
+  const filteredBookmarks = data?.data
+    .filter(bookmark => {
+      if (query === '') {
+        return bookmark;
+      } else if (
+        bookmark.tweet.full_text.toLowerCase().includes(query.toLowerCase())
+      ) {
+        return bookmark;
+      }
+    })
+    .map(bookmark => {
+      return (
+        <Bookmark
+          key={bookmark.tweet.id_str}
+          bookmark={bookmark}
+          folder={folder}
+        />
+      );
+    });
+
   return (
     <>
       <div className="w-full relative mx-auto text-primary">
@@ -25,7 +45,8 @@ export default function Bookmarks({ folder }) {
           ></path>
         </svg>
         <input
-          className="pl-10 input border-base-200 bg-white pr-4 rounded-box focus:outline-none w-full placeholder:text-base-300 "
+          className="pl-10 input border-base-200 bg-white pr-4 rounded-box focus:outline-none w-full placeholder:text-base-300"
+          autoComplete="off"
           type="search"
           name="search"
           placeholder="Cari bookmark"
@@ -34,29 +55,19 @@ export default function Bookmarks({ folder }) {
       </div>
       <div className="flex-1 flex-col overflow-y-scroll space-y-3 bg-base-100 mt-4 p-2 lg:p-3 rounded-box">
         {!data && <BookmarksLoading />}
-        {data?.data.length === 0 && <BookmarksEmpty />}
-        {data?.data.length > 0 &&
-          data.data
-            .filter(bookmark => {
-              if (query === '') {
-                return bookmark;
-              } else if (
-                bookmark.tweet.full_text
-                  .toLowerCase()
-                  .includes(query.toLowerCase())
-              ) {
-                return bookmark;
-              }
-            })
-            .map(bookmark => {
-              return (
-                <Bookmark
-                  key={bookmark.tweet.id}
-                  bookmark={bookmark}
-                  folderName={folder}
-                />
-              );
-            })}
+        {data?.data.length === 0 && (
+          <BookmarksEmpty
+            msg={'Belum ada bookmark, silahkan tambahkan bookmark'}
+          />
+        )}
+        {data?.data.length > 0 && filteredBookmarks}
+        {filteredBookmarks?.length === 0 &&
+          query !== '' &&
+          data?.data.length !== 0 && (
+            <BookmarksEmpty
+              msg={`Tidak ditemukan bookmark dengan keyword ${query}`}
+            />
+          )}
       </div>
     </>
   );
@@ -79,13 +90,27 @@ function BookmarksLoading() {
   );
 }
 
-function BookmarksEmpty() {
+function BookmarksEmpty({ msg }) {
   return (
-    <div className="flex flex-col h-48 space-y-2">
+    <div className="flex flex-col h-32 space-y-2 items-center justify-center text-center text-primary cursor-not-allowed">
       <div className="card bg-base-100">
         <div className="card-body p-4">
-          <p className="card-title h-8 rounded-md">
-            Belum ada data, silahkan tambahkan bookmark
+          <p className="card-title rounded-md">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-6 h-6"
+              viewBox="0 0 24 24"
+              strokeWidth="2"
+              stroke="currentColor"
+              fill="none"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+              <line x1="3" y1="3" x2="21" y2="21" />
+              <path d="M17 17v3l-5 -3l-5 3v-13m1.178 -2.818c.252 -.113 .53 -.176 .822 -.176h6a2 2 0 0 1 2 2v7" />
+            </svg>
+            {msg}
           </p>
         </div>
       </div>
