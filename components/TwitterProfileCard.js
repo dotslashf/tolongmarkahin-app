@@ -175,18 +175,14 @@ function TwitterProfileCardLoading() {
         </div>
       </div>
       <div className="stats stats-vertical shadow-md">
-        <div className="stat px-4">
-          <div className="stat-figure text-gray-400">
-            <div className="w-10 h-10 rounded-full bg-gray-400"></div>
+        {[...Array(3)].map((_, i) => (
+          <div className="stat px-4" key={i}>
+            <div className="stat-figure text-gray-400">
+              <div className="w-10 h-10 rounded-full bg-gray-400"></div>
+            </div>
+            <div className="stat-value bg-gray-400 h-10 w-36 rounded-md"></div>
           </div>
-          <div className="stat-value bg-gray-400 h-10 rounded-md"></div>
-        </div>
-        <div className="stat px-4">
-          <div className="stat-figure text-gray-400">
-            <div className="w-10 h-10 rounded-full bg-gray-400"></div>
-          </div>
-          <div className="stat-value bg-gray-400 h-10 rounded-md"></div>
-        </div>
+        ))}
       </div>
     </div>
   );

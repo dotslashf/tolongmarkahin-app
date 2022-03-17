@@ -29,7 +29,7 @@ export default function Bookmarks({ folder }) {
 
   return (
     <>
-      <div className="w-full relative mx-auto text-primary">
+      <div className="w-full relative mx-auto text-primary h-16">
         <svg
           className="w-4 h-4 absolute left-2 top-1/2 -translate-y-1/2 translate-x-1/2"
           fill="none"
@@ -47,8 +47,6 @@ export default function Bookmarks({ folder }) {
         <input
           className="pl-10 input border-base-200 bg-base-100 pr-4 rounded-xl focus:outline-none w-full placeholder:text-base-300 h-16"
           autoComplete="off"
-          type="search"
-          name="search"
           placeholder="Cari bookmark"
           onChange={e => setQuery(e.target.value)}
         />
@@ -76,42 +74,25 @@ export default function Bookmarks({ folder }) {
 function BookmarksLoading() {
   return (
     <div className="flex flex-col h-auto space-y-2 animate-pulse">
-      <div className="card bg-base-200">
-        <div className="card-body p-4">
-          <div className="flex w-full items-center space-x-4">
-            <div className="bg-gray-400 w-16 h-16 rounded-md"></div>
-            <div className="bg-gray-400 w-32 h-6 rounded-md"></div>
-          </div>
-          <div className="flex space-x-2">
-            <div className="bg-gray-400 w-32 h-4 rounded-md"></div>
-            <div className="bg-gray-400 w-32 h-4 rounded-md"></div>
-          </div>
-          <div className="bg-gray-400 h-8 rounded-md"></div>
-
-          <div className="card-actions justify-end mt-4">
-            <button className="rounded-md h-8 bg-gray-400 w-24"></button>
-            <button className="rounded-md h-8 bg-gray-400 w-24"></button>
-          </div>
-        </div>
-      </div>
-      <div className="card bg-base-200">
-        <div className="card-body p-4">
-          <div className="flex w-full items-center space-x-4">
-            <div className="bg-gray-400 w-16 h-16 rounded-md"></div>
-            <div className="bg-gray-400 w-32 h-6 rounded-md"></div>
-          </div>
-          <div className="flex space-x-2">
-            <div className="bg-gray-400 w-32 h-4 rounded-md"></div>
-            <div className="bg-gray-400 w-32 h-4 rounded-md"></div>
-          </div>
-          <div className="bg-gray-400 h-8 rounded-md"></div>
-
-          <div className="card-actions justify-end mt-4">
-            <button className="rounded-md h-8 bg-gray-400 w-24"></button>
-            <button className="rounded-md h-8 bg-gray-400 w-24"></button>
+      {[...Array(3)].map((_, i) => (
+        <div className="card bg-base-200" key={i}>
+          <div className="card-body p-4">
+            <div className="flex w-full items-center space-x-4">
+              <div className="bg-gray-400 w-16 h-16 rounded-md"></div>
+              <div className="bg-gray-400 w-32 h-6 rounded-md"></div>
+            </div>
+            <div className="flex flex-col md:flex-row md:space-x-2 space-y-2 md:space-y-0">
+              <div className="bg-gray-400 w-32 h-4 rounded-md"></div>
+              <div className="bg-gray-400 w-32 h-4 rounded-md"></div>
+            </div>
+            <div className="bg-gray-400 h-12 rounded-md"></div>
+            <div className="card-actions items-end md:justify-end mt-4 flex flex-col md:flex-row">
+              <button className="rounded-md h-8 bg-gray-400 w-24"></button>
+              <button className="rounded-md h-8 bg-gray-400 w-24"></button>
+            </div>
           </div>
         </div>
-      </div>
+      ))}
     </div>
   );
 }
