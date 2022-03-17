@@ -45,7 +45,7 @@ export default function Bookmarks({ folder }) {
           ></path>
         </svg>
         <input
-          className="pl-10 input border-base-200 bg-white pr-4 rounded-box focus:outline-none w-full placeholder:text-base-300"
+          className="pl-10 input border-base-200 bg-base-100 pr-4 rounded-box focus:outline-none w-full placeholder:text-base-300 h-16"
           autoComplete="off"
           type="search"
           name="search"
@@ -95,7 +95,7 @@ function BookmarksEmpty({ msg }) {
     <div className="flex flex-col h-32 space-y-2 items-center justify-center text-center text-primary cursor-not-allowed">
       <div className="card bg-base-100">
         <div className="card-body p-4">
-          <p className="card-title rounded-md">
+          <p className="card-title rounded-md flex flex-col md:flex-row">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               className="w-6 h-6"
