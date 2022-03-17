@@ -75,13 +75,39 @@ export default function Bookmarks({ folder }) {
 
 function BookmarksLoading() {
   return (
-    <div className="flex flex-col h-96 mt-4 space-y-2">
-      <div className="card bg-base-100">
+    <div className="flex flex-col h-auto space-y-2 animate-pulse">
+      <div className="card bg-base-200">
         <div className="card-body p-4">
+          <div className="flex w-full items-center space-x-4">
+            <div className="bg-gray-400 w-16 h-16 rounded-md"></div>
+            <div className="bg-gray-400 w-32 h-6 rounded-md"></div>
+          </div>
+          <div className="flex space-x-2">
+            <div className="bg-gray-400 w-32 h-4 rounded-md"></div>
+            <div className="bg-gray-400 w-32 h-4 rounded-md"></div>
+          </div>
           <div className="bg-gray-400 h-8 rounded-md"></div>
-          <div className="bg-gray-400 h-6 rounded-md"></div>
 
           <div className="card-actions justify-end mt-4">
+            <button className="rounded-md h-8 bg-gray-400 w-24"></button>
+            <button className="rounded-md h-8 bg-gray-400 w-24"></button>
+          </div>
+        </div>
+      </div>
+      <div className="card bg-base-200">
+        <div className="card-body p-4">
+          <div className="flex w-full items-center space-x-4">
+            <div className="bg-gray-400 w-16 h-16 rounded-md"></div>
+            <div className="bg-gray-400 w-32 h-6 rounded-md"></div>
+          </div>
+          <div className="flex space-x-2">
+            <div className="bg-gray-400 w-32 h-4 rounded-md"></div>
+            <div className="bg-gray-400 w-32 h-4 rounded-md"></div>
+          </div>
+          <div className="bg-gray-400 h-8 rounded-md"></div>
+
+          <div className="card-actions justify-end mt-4">
+            <button className="rounded-md h-8 bg-gray-400 w-24"></button>
             <button className="rounded-md h-8 bg-gray-400 w-24"></button>
           </div>
         </div>
