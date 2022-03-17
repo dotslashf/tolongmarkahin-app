@@ -41,7 +41,9 @@ export default function Bookmarks({ folder }) {
               if (query === '') {
                 return bookmark;
               } else if (
-                bookmark.tweet.full_text.toLowerCase().includes(query)
+                bookmark.tweet.full_text
+                  .toLowerCase()
+                  .includes(query.toLowerCase())
               ) {
                 return bookmark;
               }
