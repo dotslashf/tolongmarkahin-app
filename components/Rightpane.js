@@ -44,6 +44,14 @@ export default function Rightpane({ defaultFolder }) {
     })
     .sort(value => {
       return value.isDefaultFolder ? -1 : 1;
+    })
+    .sort((a, b) => {
+      if (a.isDefaultFolder) {
+        return -1;
+      } else if (b.isDefaultFolder) {
+        return 1;
+      }
+      return b.bookmarksCount - a.bookmarksCount;
     });
 
   return (
