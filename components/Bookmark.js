@@ -100,7 +100,7 @@ export default function Bookmark({ bookmark, folderName }) {
                   <div className="carousel-item" key={media.media_url}>
                     <a href={media.media_url} target="_blank" rel="noreferrer">
                       <img
-                        className="w-28 h-28 md:h-36 md:w-36 object-cover rounded-box"
+                        className="w-28 h-28 md:h-36 md:w-36 object-top object-cover rounded-box"
                         src={media.media_url}
                         alt={bookmark.tweet.user.screen_name}
                       />
