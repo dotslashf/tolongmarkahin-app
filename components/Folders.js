@@ -14,6 +14,16 @@ export default function Folders({ selected, folders, onClickFolder }) {
                 }
                 onClick={onClickFolder(folder.id)}
               >
+                <div
+                  className={
+                    'px-2.5 text-sm hover:bg-primary-focus ' +
+                    (selected === folder.id
+                      ? 'bg-base-100 text-primary'
+                      : 'bg-primary text-base-100')
+                  }
+                >
+                  {folder.bookmarksCount}
+                </div>
                 {selected === folder.id ? (
                   <svg
                     className="w-6 h-6"
@@ -45,7 +55,7 @@ export default function Folders({ selected, folders, onClickFolder }) {
                     ></path>
                   </svg>
                 )}
-                {folder.id} ({folder.bookmarksCount})
+                {folder.id}
               </button>
             </li>
           );
