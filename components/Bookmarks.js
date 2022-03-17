@@ -4,7 +4,7 @@ import fetcher from '../utils/fetcher';
 import { useState } from 'react';
 
 export default function Bookmarks({ folder }) {
-  const { data, error } = useSWR(`/api/firebase/${folder}`, fetcher);
+  const { data, error } = useSWR(`/api/firebase/folder/${folder}`, fetcher);
   const [query, setQuery] = useState('');
 
   const filteredBookmarks = data?.data

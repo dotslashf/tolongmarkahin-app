@@ -18,7 +18,7 @@ export default function Bookmark({ bookmark, folderName }) {
       body: JSON.stringify({ folder: folderName, bookmarkId }),
     });
     if (res.ok) {
-      mutate(`/api/firebase/${folderName}`);
+      mutate(`/api/firebase/folder/${folderName}`);
       mutate(`/api/firebase/folders`);
       setIsOpen(false);
     }

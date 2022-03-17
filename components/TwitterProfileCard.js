@@ -6,6 +6,7 @@ import { useSession, signOut } from 'next-auth/react';
 export default function TwitterProfileCard() {
   const { data: session } = useSession();
   const { data, error } = useSWR(`/api/twitter/${session.user.id}`, fetcher);
+  const { data: dataBookmarks } = useSWR(`/api/firebase/bookmarks`, fetcher);
 
   if (error) return <TwitterProfileCardError />;
   if (!data) return <TwitterProfileCardLoading />;
@@ -124,6 +125,28 @@ export default function TwitterProfileCard() {
           </div>
           <div className="stat-title">Following</div>
           <div className="stat-value text-secondary">{data.friends_count}</div>
+        </div>
+        <div className="stat">
+          <div className="stat-figure text-accent">
+            <svg
+              className="w-8"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+              ></path>
+            </svg>
+          </div>
+          <div className="stat-title">Total Bookmarks</div>
+          <div className="stat-value text-accent">
+            {dataBookmarks.totalCounts}
+          </div>
         </div>
       </div>
     </div>

@@ -1,4 +1,4 @@
-import db from '../../../services/firebase';
+import db from '../../../../services/firebase';
 import { getToken } from 'next-auth/jwt';
 
 const secret = process.env.NEXT_AUTH_SECRET;
