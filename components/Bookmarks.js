@@ -45,7 +45,7 @@ export default function Bookmarks({ folder }) {
           ></path>
         </svg>
         <input
-          className="pl-10 input border-base-200 bg-base-100 pr-4 rounded-box focus:outline-none w-full placeholder:text-base-300 h-16"
+          className="pl-10 input border-base-200 bg-base-100 pr-4 rounded-xl focus:outline-none w-full placeholder:text-base-300 h-16"
           autoComplete="off"
           type="search"
           name="search"
