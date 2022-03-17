@@ -14,18 +14,22 @@ export default async function handler(req, res) {
     return res.status(401).json({ message: 'No token' });
   }
 
-  const { folder, bookmarkId } = JSON.parse(req.body);
+  if (req.method === 'POST') {
+    const { folder, bookmarkId } = JSON.parse(req.body);
 
-  try {
-    await db
-      .collection('bookmarks')
-      .doc(token.id)
-      .collection(folder)
-      .doc(bookmarkId)
-      .delete();
+    try {
+      await db
+        .collection('bookmarks')
+        .doc(token.id)
+        .collection(folder)
+        .doc(bookmarkId)
+        .delete();
 
-    return res.status(200).json({ status: 'OK', message: 'Bookmark deleted' });
-  } catch (err) {
-    return res.status(404).json({ error: err.message });
+      return res
+        .status(200)
+        .json({ status: 'OK', message: 'Bookmark deleted' });
+    } catch (err) {
+      return res.status(400).json({ error: err.message });
+    }
   }
 }

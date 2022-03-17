@@ -22,7 +22,7 @@ export default function Bookmarks({ folder }) {
         <Bookmark
           key={bookmark.tweet.id_str}
           bookmark={bookmark}
-          folder={folder}
+          folderName={folder}
         />
       );
     });
