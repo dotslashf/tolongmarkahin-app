@@ -35,13 +35,24 @@ export default function Rightpane({ defaultFolder }) {
     };
   };
 
+  const sortedFolders = data?.data
+    .map(folder => {
+      return {
+        ...folder,
+        isDefaultFolder: folder.id === defaultFolder,
+      };
+    })
+    .sort(value => {
+      return value.isDefaultFolder ? -1 : 1;
+    });
+
   return (
     <div className="flex flex-col relative">
       {!data && <RightpaneLoading />}
       {data?.data.length > 0 && (
         <>
           <Folders
-            folders={data.data}
+            folders={sortedFolders}
             onClickFolder={handlerOnClickFolder}
             selected={selectedFolder}
           />
