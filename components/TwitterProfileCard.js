@@ -5,14 +5,13 @@ import { useSession, signOut } from 'next-auth/react';
 
 export default function TwitterProfileCard() {
   const { data: session } = useSession();
-  const { data, error } = useSWR(`/api/twitter/${session.user.id}`, fetcher);
+  const { data } = useSWR(`/api/twitter/${session.user.id}`, fetcher);
   const { data: dataBookmarks } = useSWR(`/api/firebase/bookmarks`, fetcher);
 
   return (
     <>
-      {error && <TwitterProfileCardError />}
-      {!data && <TwitterProfileCardLoading />}
-      {data && (
+      {!data && !dataBookmarks && <TwitterProfileCardLoading />}
+      {data && dataBookmarks && (
         <div className="card card-compact bg-base-100 shadow-sm">
           <figure>
             <img
