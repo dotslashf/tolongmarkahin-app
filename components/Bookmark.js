@@ -63,12 +63,7 @@ export default function Bookmark({ bookmark, folderName }) {
             </svg>
             {bookmark.tweet.user.screen_name}
           </a>
-          <a
-            href={`https://www.twitter.com/${bookmark.tweet.user.screen_name}`}
-            target="_blank"
-            className="badge badge-accent font-bold gap-2"
-            rel="noreferrer"
-          >
+          <span className="badge badge-accent font-bold gap-2">
             <svg
               className="w-4 h-4"
               fill="none"
@@ -84,7 +79,7 @@ export default function Bookmark({ bookmark, folderName }) {
               ></path>
             </svg>
             ditambahkan {formatDate(bookmark.createdAt)}
-          </a>
+          </span>
         </div>
         <p>{bookmark.tweet.full_text}</p>
         <div
