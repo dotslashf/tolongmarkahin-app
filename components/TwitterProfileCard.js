@@ -11,8 +11,8 @@ export default function TwitterProfileCard() {
   return (
     <>
       {error && <TwitterProfileCardError />}
-      {!data && !dataBookmarks && <TwitterProfileCardLoading />}
-      {data && dataBookmarks && (
+      {!data && <TwitterProfileCardLoading />}
+      {data && (
         <div className="card card-compact bg-base-100 shadow-sm">
           <figure>
             <img
