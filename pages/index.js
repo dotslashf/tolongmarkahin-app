@@ -14,13 +14,13 @@ export default function Home() {
       <div className="px-4">
         <div className="hero max-w-xs md:max-w-md bg-base-200 rounded-box shadow-xl">
           <div className="hero-content text-center">
-            <div className="flex flex-col py-8">
+            <div className="flex flex-col py-8 px-4">
               {!session && (
                 <>
-                  <h1 className="text-4xl font-bold">
+                  <h1 className="text-3xl font-bold">
                     You&apos;re not sign in
                   </h1>
-                  <div className="mt-4">
+                  <div className="mt-6">
                     <button
                       className="btn btn-sm btn-primary gap-2"
                       onClick={e => {
@@ -49,10 +49,10 @@ export default function Home() {
               )}
               {session?.user && (
                 <>
-                  <h1 className="text-4xl font-bold">
+                  <h1 className="text-3xl font-bold">
                     You&apos;re sign as {session.user.username}
                   </h1>
-                  <div className="flex space-x-4 items-center justify-center mt-4">
+                  <div className="flex space-x-4 items-center justify-center mt-6">
                     <a className="btn btn-sm btn-primary gap-2" href="/home">
                       <svg
                         className="w-4 h-4"
