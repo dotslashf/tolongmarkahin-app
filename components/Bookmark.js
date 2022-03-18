@@ -20,6 +20,7 @@ export default function Bookmark({ bookmark, folderName }) {
     if (res.ok) {
       mutate(`/api/firebase/folder/${folderName}`);
       mutate(`/api/firebase/folders`);
+      mutate(`/api/firebase/bookmarks`);
       setIsOpen(false);
     }
   }
