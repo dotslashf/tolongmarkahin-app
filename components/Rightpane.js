@@ -3,6 +3,7 @@ import fetcher from '../utils/fetcher';
 import Folders from './Folders';
 import { useState } from 'react';
 import Tweets from './Bookmarks';
+import * as ga from '../services/ga';
 
 function RightpaneLoading() {
   return (
@@ -31,6 +32,12 @@ export default function Rightpane({ defaultFolder }) {
 
   const handlerOnClickFolder = folderName => {
     return () => {
+      ga.event({
+        action: 'folder',
+        params: {
+          folder_name: folderName,
+        },
+      });
       setSelectedFolder(folderName);
     };
   };

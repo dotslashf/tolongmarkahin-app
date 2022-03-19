@@ -2,6 +2,7 @@
 import useSWR from 'swr';
 import fetcher from '../utils/fetcher';
 import { useSession, signOut } from 'next-auth/react';
+import * as ga from '../services/ga';
 
 export default function TwitterProfileCard() {
   const { data: session } = useSession();
@@ -41,6 +42,11 @@ export default function TwitterProfileCard() {
               <button
                 className="btn btn-sm btn-accent gap-2"
                 onClick={() => {
+                  ga.event({
+                    category: 'twitter',
+                    action: 'ke_profile',
+                    label: `${data.screen_name}`,
+                  });
                   window.open(`https://twitter.com/${data.screen_name}`);
                 }}
               >

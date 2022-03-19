@@ -2,6 +2,7 @@ import Modal from './Modal';
 import { useState } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import { formatDate } from '../utils/common';
+import * as ga from '../services/ga';
 
 /* eslint-disable @next/next/no-img-element */
 export default function Bookmark({ bookmark, folderName }) {
@@ -21,6 +22,12 @@ export default function Bookmark({ bookmark, folderName }) {
       mutate(`/api/firebase/folder/${folderName}`);
       mutate(`/api/firebase/folders`);
       mutate(`/api/firebase/bookmarks`);
+      ga.event({
+        action: 'delete',
+        params: {
+          bookmark_id: bookmarkId,
+        },
+      });
       setIsOpen(false);
     }
   }
@@ -111,6 +118,11 @@ export default function Bookmark({ bookmark, folderName }) {
             <button
               className="btn btn-sm btn-accent gap-2"
               onClick={() => {
+                ga.event({
+                  category: 'bookmark',
+                  action: 'ke_bookmark',
+                  label: bookmark.tweet.full_text,
+                });
                 window.open(
                   `https://twitter.com/${bookmark.tweet.user.screen_name}/status/${bookmark.tweet.id_str}`
                 );

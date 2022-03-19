@@ -2,6 +2,7 @@ import Bookmark from './Bookmark';
 import useSWR from 'swr';
 import fetcher from '../utils/fetcher';
 import { useState } from 'react';
+import * as ga from '../services/ga';
 
 export default function Bookmarks({ folder }) {
   const { data, error } = useSWR(`/api/firebase/folder/${folder}`, fetcher);
@@ -48,7 +49,15 @@ export default function Bookmarks({ folder }) {
           className="pl-10 input border-base-200 bg-base-100 pr-4 rounded-xl focus:outline-none w-full placeholder:text-base-300 h-16"
           autoComplete="off"
           placeholder="Cari bookmark"
-          onChange={e => setQuery(e.target.value)}
+          onChange={e => {
+            setQuery(e.target.value);
+            ga.event({
+              action: 'search',
+              params: {
+                search_term: e.target.value,
+              },
+            });
+          }}
         />
       </div>
       <div className="flex-1 flex-col overflow-y-scroll space-y-3 bg-base-100 mt-4 p-2 lg:p-3 rounded-box">
