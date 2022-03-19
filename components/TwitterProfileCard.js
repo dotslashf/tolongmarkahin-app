@@ -30,7 +30,10 @@ export default function TwitterProfileCard() {
               <div className="avatar">
                 <div className="w-16 rounded-box">
                   <img
-                    src={`${data.profile_image_url.replace('_normal', '')}`}
+                    src={`${data.profile_image_url_https.replace(
+                      '_normal',
+                      ''
+                    )}`}
                     alt={`${data.screen_name}`}
                   />
                 </div>

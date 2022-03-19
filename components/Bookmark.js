@@ -39,7 +39,7 @@ export default function Bookmark({ bookmark, folderName }) {
           <div className="avatar">
             <div className="w-16 rounded-box">
               <img
-                src={`${bookmark.tweet.user.profile_image_url.replace(
+                src={`${bookmark.tweet.user.profile_image_url_https.replace(
                   '_normal',
                   ''
                 )}`}
@@ -100,11 +100,15 @@ export default function Bookmark({ bookmark, folderName }) {
             <div className="carousel carousel-center max-w-sm p-2 space-x-2 bg-base-100 rounded-box mt-4">
               {bookmark.tweet.extended_entities.media.map(media => {
                 return (
-                  <div className="carousel-item" key={media.media_url}>
-                    <a href={media.media_url} target="_blank" rel="noreferrer">
+                  <div className="carousel-item" key={media.media_url_https}>
+                    <a
+                      href={media.media_url_https}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
                       <img
                         className="w-28 h-28 md:h-36 md:w-36 object-top object-cover rounded-box"
-                        src={media.media_url}
+                        src={media.media_url_https}
                         alt={bookmark.tweet.user.screen_name}
                       />
                     </a>
