@@ -3,14 +3,20 @@ import { useState } from 'react';
 import useSWR, { useSWRConfig } from 'swr';
 import { formatDate } from '../utils/common';
 import * as ga from '../services/ga';
+import ModalCarousel from './ModalCarousel';
 
 /* eslint-disable @next/next/no-img-element */
 export default function Bookmark({ bookmark, folderName }) {
   let [isOpen, setIsOpen] = useState(false);
+  let [isOpenModalCarousel, setIsOpenModalCarousel] = useState(false);
   const { mutate } = useSWRConfig();
 
   function openModal() {
     setIsOpen(true);
+  }
+
+  function openModalCarousel() {
+    setIsOpenModalCarousel(true);
   }
 
   async function onDeleteBookmark(bookmarkId) {
@@ -97,25 +103,29 @@ export default function Bookmark({ bookmark, folderName }) {
           }
         >
           {bookmark.tweet.extended_entities ? (
-            <div className="carousel carousel-center max-w-sm p-2 space-x-2 bg-base-100 rounded-box mt-4">
-              {bookmark.tweet.extended_entities.media.map(media => {
-                return (
-                  <div className="carousel-item" key={media.media_url_https}>
-                    <a
-                      href={media.media_url_https}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
+            <>
+              <ModalCarousel
+                isOpenModalCarousel={isOpenModalCarousel}
+                setIsOpenModalCarousel={setIsOpenModalCarousel}
+                media={bookmark.tweet.extended_entities.media}
+              />
+              <div
+                className="carousel carousel-center max-w-sm p-2 space-x-2 bg-base-100 rounded-box mt-4"
+                onClick={openModalCarousel}
+              >
+                {bookmark.tweet.extended_entities.media.map(media => {
+                  return (
+                    <div className="carousel-item" key={media.media_url_https}>
                       <img
                         className="w-28 h-28 md:h-36 md:w-36 object-top object-cover rounded-box"
                         src={media.media_url_https}
                         alt={bookmark.tweet.user.screen_name}
                       />
-                    </a>
-                  </div>
-                );
-              })}
-            </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </>
           ) : null}
 
           <div className="flex flex-col md:flex-row md:space-x-2 md:space-y-0 space-y-2 self-end">

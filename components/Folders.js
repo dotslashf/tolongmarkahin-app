@@ -1,6 +1,6 @@
 export default function Folders({ selected, folders, onClickFolder }) {
   return (
-    <div className="flex overflow-x-scroll w-full sticky top-0 z-50 rounded-box shadow-sm mb-4">
+    <div className="flex overflow-x-scroll w-full sticky top-0 z-10 rounded-box shadow-sm mb-4">
       <ul className="menu menu-horizontal space-x-2 p-2 lg:p-3 bg-base-100 min-w-max w-full rounded-box">
         {folders.map(folder => {
           return (
