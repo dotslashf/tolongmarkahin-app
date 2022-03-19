@@ -16,7 +16,7 @@ export default function Folders({ selected, folders, onClickFolder }) {
               >
                 <div
                   className={
-                    'px-2.5 text-sm hover:bg-primary-focus ' +
+                    'px-2.5 text-sm ' +
                     (selected === folder.id
                       ? 'bg-base-100 text-primary'
                       : 'bg-primary text-base-100')
