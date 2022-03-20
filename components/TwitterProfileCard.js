@@ -11,7 +11,7 @@ export default function TwitterProfileCard() {
 
   return (
     <>
-      {!data && !dataBookmarks && <TwitterProfileCardLoading />}
+      {(!data || !dataBookmarks) && <TwitterProfileCardLoading />}
       {data && dataBookmarks && (
         <div className="card card-compact bg-base-100 shadow-sm">
           <figure>
