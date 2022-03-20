@@ -45,22 +45,23 @@ export default function ModalCarousel({
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block w-full h-auto max-w-xs md:max-w-full p-4 bg-base-200 overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-box">
-              <div className="flex items-center space-x-4 h-full justify-center">
-                <div className="carousel carousel-center space-x-2 h-full">
+            <div className="inline-block h-auto max-w-xs md:max-w-xl p-4 bg-base-200 overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-box">
+              <div className="flex items-center space-x-4 h-full justify-center rounded-box">
+                <div className="carousel carousel-center space-x-2 h-full rounded-box">
                   {media.map(item => {
                     return (
                       <div
-                        className="carousel-item w-full"
+                        className="carousel-item items-center justify-center w-full max-h-96"
                         key={item.media_url_https}
                       >
                         <a
                           href={item.media_url_https}
                           target="_blank"
                           rel="noreferrer"
+                          className="h-full"
                         >
                           <img
-                            className="object-top object-cover rounded-md"
+                            className="h-full object-top object-cover rounded-box"
                             src={item.media_url_https}
                             alt={item.alt_text}
                           />
