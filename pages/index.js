@@ -18,7 +18,7 @@ export default function Home() {
         />
         <meta
           name="twitter:image"
-          content="https://tolongmarkahin.vercel.app/static/twitter-card.png"
+          content="https://tolongmarkahin.vercel.app/twitter-card.png"
         />
         <meta name="twitter:creator" content="@tolongmarkahin" />
       </Head>
