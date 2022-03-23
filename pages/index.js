@@ -9,7 +9,18 @@ export default function Home() {
     <div className="flex items-center justify-center h-screen bg-base-300">
       <Head>
         <title>Tolongmarkahin</title>
-        <meta property="og:title" content="My page title" key="title" />
+        <meta property="og:title" content="Tolongmarkahin" key="title" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:site" content="@tolongmarkahin" />
+        <meta
+          name="twitter:description"
+          content="Tolongmarkahin, membantu mengarsipkan tweet favorit kamu."
+        />
+        <meta
+          name="twitter:image"
+          content="https://tolongmarkahin.vercel.app/static/twitter-card.png"
+        />
+        <meta name="twitter:creator" content="@tolongmarkahin" />
       </Head>
       <div className="px-4">
         <div className="hero max-w-xs md:max-w-md bg-base-200 rounded-box shadow-xl">
