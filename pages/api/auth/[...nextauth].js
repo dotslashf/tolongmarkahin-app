@@ -6,13 +6,18 @@ const NODE_ENV = process.env.NODE_ENV;
 export default NextAuth({
   providers: [
     CredentialsProvider({
-      name: 'custom',
+      id: 'username',
+      name: 'username',
       credentials: {
-        username: { label: 'Username', type: 'text', placeholder: 'Username' },
+        username: {
+          label: 'Username',
+          type: 'text',
+          placeholder: 'Masukkan username',
+        },
         password: {
           label: 'Password',
           type: 'password',
-          placeholder: 'Password',
+          placeholder: 'Masukkan password',
         },
       },
       async authorize(credentials) {
@@ -29,6 +34,15 @@ export default NextAuth({
           }
         );
         const user = await res.json();
+        if (!res.ok) {
+          if (user.message === 'No matching documents.') {
+            throw new Error('Akun tidak ditemukan');
+          }
+          if (user.message === 'Invalid password.') {
+            throw new Error('Password salah');
+          }
+          throw new Error(user.message);
+        }
         if (res.ok && user) {
           return user;
         }
@@ -36,6 +50,9 @@ export default NextAuth({
       },
     }),
   ],
+  pages: {
+    signIn: '/signIn',
+  },
   session: {
     jwt: true,
     maxAge: 7 * 24 * 60 * 60,
